@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qos-besteffort
+  namespace: khool-kpl-podqos
+  labels:
+    hol.khool.net/scope: demo
+spec:
+  terminationGracePeriodSeconds: 5
+  containers:
+  - name: logger
+    image: kanedafromparis/logversion:2.0

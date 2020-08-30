@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: d-limit-range
+  namespace: khool-kpl-lmr
+  labels:
+    hol.khool.net/scope: demo
+spec:
+  limits:
+  - min: 
+      cpu: 300m
+    max: 
+      cpu: 1500m
+    type: Container

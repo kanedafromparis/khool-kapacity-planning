@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: khool-kpl-resourcequota
+  labels:
+    hol.khool.net/scope: demo
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 1
+  name: d-qos-guaranteed
+  namespace: khool-kpl-lmr
+  labels:
+    app: d-qos-guaranteed
+    hol.khool.net/scope: demo
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: d-qos-guaranteed
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: d-qos-guaranteed
+        hol.khool.net/scope: qos-guaranteed
+    spec:
+      containers:
+      - image: kanedafromparis/logversion:2.0
+        imagePullPolicy: IfNotPresent
+        name: logversion
+        resources:
+          requests:
+            cpu: 500m
+            memory: "100Mi"
+          limits:
+            cpu: 500m
+            memory: "100Mi"
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 5
+
